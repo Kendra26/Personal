@@ -16,7 +16,7 @@ jobs:
       # Step 2: Clone the Torrentp repository from GitHub
       - name: Clone Torrentp repository
         run: |
-          git clone https://github.com/your-username/torrentp.git  # Replace with the actual Torrentp repo URL
+          git clone https://github.com/iw4p/torrentp.git  # Replace with the actual Torrentp repo URL
           cd torrentp
           
       # Step 3: Install any dependencies (if necessary)
