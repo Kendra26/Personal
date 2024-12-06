@@ -18,13 +18,7 @@ jobs:
         run: |
           git clone https://github.com/iw4p/torrentp.git  # Replace with the actual Torrentp repo URL
           cd torrentp
-          
-      # Step 3: Install any dependencies (if necessary)
-      - name: Install dependencies
-        run: |
-          sudo apt-get install -y python3-pip python3-setuptools python3-dev  # Install dependencies
-          pip3 install -r torrentp/requirements.txt  # If there are dependencies in the repo (adjust path as necessary)
-
+        
       # Step 4: Use torrentp to download the torrent via magnet link
       - name: Download Torrent
         run: |
