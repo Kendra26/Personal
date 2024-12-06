@@ -1,0 +1,41 @@
+name: Torrent Download with Torrentp
+
+on:
+  push:
+    branches:
+      - main  # You can adjust this to trigger on other events, like pull requests or schedule
+
+jobs:
+  torrentp-job:
+    runs-on: ubuntu-latest  # Use an Ubuntu runner (or other OS as needed)
+    steps:
+      # Step 1: Checkout the repository (if you want to work on your own code)
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Clone the Torrentp repository from GitHub
+      - name: Clone Torrentp repository
+        run: |
+          git clone https://github.com/your-username/torrentp.git  # Replace with the actual Torrentp repo URL
+          cd torrentp
+          
+      # Step 3: Install any dependencies (if necessary)
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pip python3-setuptools python3-dev  # Install dependencies
+          pip3 install -r torrentp/requirements.txt  # If there are dependencies in the repo (adjust path as necessary)
+
+      # Step 4: Use torrentp to download the torrent via magnet link
+      - name: Download Torrent
+        run: |
+          cd torrentp  # Change directory into the cloned repo
+          torrentp --link "magnet:?xt=urn:btih:9FC3BCB83ABC1A5E28C9A84C5A1109990E89A7F3&dn=Silo.S02E02.WEB.x264-PHOENiX&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.tiny-vps.com%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Fexplodie.org%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.cyberia.is%3A6969%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.birkenwald.de%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.moeking.me%3A6969%2Fannounce&tr=udp%3A%2F%2Fopentor.org%3A2710%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fuploads.gamecoast.net%3A6969%2Fannounce&tr=https%3A%2F%2Ftracker.foreverpirates.co%3A443%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=http%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=udp%3A%2F%2Fopentracker.i2p.rocks%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fcoppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.zer0day.to%3A1337%2Fannounce"  # Replace with actual magnet link
+
+      # Step 5: Save the downloaded files as artifacts
+      - name: Upload downloaded files as artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: downloaded-torrent  # Artifact name
+          path: ./torrentp/downloads  # Adjust this to the actual directory where files are downloaded
+
