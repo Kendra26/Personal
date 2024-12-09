@@ -1,4 +1,4 @@
-name: Download Torrent with Deluge
+name: Torrent Download
 
 on:
   push:
@@ -6,53 +6,25 @@ on:
       - main  # Change this to your default branch as necessary
 
 jobs:
-  run-deluge:
+  download:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
+      - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Install Deluge and Dependencies
+      - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y deluged deluge-console
+          sudo apt-get install -y torrent-dl
 
-      - name: Start Deluge Daemon
+      - name: Torrent Download
+        env:
+          TORRENT_CREDENTIALS: ${{ secrets.TORRENT_CREDENTIALS }}
         run: |
-          deluged &
-          sleep 10  # Wait for the daemon to start
-
-      - name: Add Torrent Using Deluge Console
-        run: |
-          deluge-console add "magnet:?xt=urn:btih:0D4AF725CC7CDF3CE933E5BFF8C0B3A6ED6E0D93&dn=Python+Programming+And+Maching+Learning+Understanding+How+To+Cod"
-
-      - name: Wait Before Checking Torrent Status
-        run: sleep 600  # Wait 120 seconds (adjust as necessary)
-
-      - name: Check Torrent Status
-        id: check_status
-        run: |
-          state=$(deluge-console info | grep 'State:' | awk '{print $2}')
-          echo "Current Torrent State: $state"
-          if [[ "$state" == "Finished" ]]; then
-            echo "Torrent download is complete."
-            echo "status=complete" >> $GITHUB_ENV
-          else
-            echo "Torrent download is still in progress or failed."
-            echo "status=failed" >> $GITHUB_ENV
-          fi
-
-      - name: List Downloaded Files
-        if: env.status == 'complete'
-        run: |
-          download_dir="$HOME/Downloads"  # Adjust this as necessary
-          echo "Files in $download_dir:"
-          ls -lh "$download_dir" || true  # Use '|| true' to avoid failing the step if the directory is empty.
-
-      - name: Upload Downloaded Files as Artifacts
-        if: env.status == 'complete'
-        uses: actions/upload-artifact@v3  # Updated to v3
-        with:
-          name: downloaded-files
-          path: "$HOME/Downloads/*"  # Adjust this path based on where Deluge saves downloaded files.
+          # Create a directory to store the downloads
+          mkdir -p downloads
+          
+          # Use torrent-dl to download the specified torrent
+          torrent-dl -i "magnet:?xt=urn:btih:CD8A749FCEE134E4B03744EA416034FEF5EDE3D9&dn=Meet the Killer Parents (2023)&tr=udp://open.demonii.com:1337/announce&tr=udp://tracker.openbittorrent.com:80&tr=udp://tracker.coppersurfer.tk:6969&tr=udp://glotorrents.pw:6969/announce&tr=udp://tracker.opentrackr.org:1337/announce&tr=udp://torrent.gresille.org:80/announce&tr=udp://p4p.arenabg.com:1337&tr=udp://tracker.leechers-paradise.org:6969"
+        
