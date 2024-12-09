@@ -16,7 +16,7 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y torrent-dl
+          npm -g install torrent-dl
 
       - name: Torrent Download
         env:
