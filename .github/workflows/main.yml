@@ -52,10 +52,7 @@ jobs:
 
       - name: Upload Downloaded Files as Artifacts
         if: env.status == 'complete'
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3  # Updated to v3
         with:
           name: downloaded-files
           path: "$HOME/Downloads/*"  # Adjust this path based on where Deluge saves downloaded files.
-
-      - name: Stop Deluge Daemon
-        run: killall deluged
