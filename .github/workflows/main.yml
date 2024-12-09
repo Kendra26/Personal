@@ -28,7 +28,7 @@ jobs:
           deluge-console add "magnet:?xt=urn:btih:0D4AF725CC7CDF3CE933E5BFF8C0B3A6ED6E0D93&dn=Python+Programming+And+Maching+Learning+Understanding+How+To+Cod"
 
       - name: Wait Before Checking Torrent Status
-        run: sleep 120  # Wait 120 seconds (adjust as necessary)
+        run: sleep 600  # Wait 120 seconds (adjust as necessary)
 
       - name: Check Torrent Status
         id: check_status
