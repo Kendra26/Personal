@@ -1,7 +1,4 @@
 version: '2.1'
-orbs:
-  python: circleci/python@3.0.0
-  aria2: circleci/aria2@1.0.0  # Add Aria2 orb for better integration
 executors:
   python-default:
     docker:
