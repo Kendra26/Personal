@@ -1,51 +1,26 @@
-version: '2.1'
-executors:
-  python-default:
-    docker:
-      - image: circleci/python:3.8
-        environment:
-          PIP_CACHE_DIR: /tmp/pip_cache
-  aria2-executor:
-    docker:
-      - image: circleci/python:3.8
-        environment:
-          PIP_CACHE_DIR: /tmp/pip_cache
-workflows:
-  version: 2
-  main:
-    jobs:
-      - python/test:
-          args: '--dev'
-          pkg-manager: pipenv
-          test-tool: pytest
-      - publish:
-          requires:
-            - python/test
-      - parallel_downloads:
-          requires:
-            - publish
+version: 2.1
 
 jobs:
-  publish:
-    executor: python-default
+  build:
+    docker:
+      - image: circleci/python:3.8  # Replace with the Docker image you use for your project
     steps:
-      - checkout
-      - python/install-packages:
-          packages: 
-            - aria2
+      - checkout  # Check out the code from the repository
+
+      # Example: Create the file in the Downloads directory
       - run:
-          name: Run Python tests
-          command: pipenv install && pipenv run pytest
-          
-  parallel_downloads:
-    executor: aria2-executor
-    parallelism: 4
-    steps:
-      - run:
-          name: Download files with Aria2c in parallel
+          name: Create a file in Downloads directory
           command: |
-            echo "Starting download tasks..."
-            aria2c --seed-time=0 -d ~/Downloads "magnet:?xt=urn:btih:8DA0E1A2026D061E2BBABB1A663D4711C848F819&dn=example"
+            mkdir -p ~/Downloads
+            echo "This is an example file" > ~/Downloads/example.txt
+
+      # Store the file in CircleCI artifacts
       - store_artifacts:
-          path: ~/Downloads
+          path: ~/Downloads/example.txt
           destination: example_files
+
+workflows:
+  version: 2
+  build_and_store:
+    jobs:
+      - build
