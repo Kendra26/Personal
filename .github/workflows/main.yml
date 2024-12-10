@@ -25,9 +25,9 @@ jobs:
           
           # Download the YouTube video using yt-dlp
           yt-dlp -o "downloads/%(title)s.%(ext)s" "https://m.youtube.com/watch?v=S82TtBYo0Kg"
-
+ 
       - name: Upload Video as Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: youtube-video
           path: downloads/
