@@ -1,4 +1,4 @@
-name: Torrent Download
+name: YouTube Video Download
 
 on:
   push:
@@ -13,18 +13,21 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Install Dependencies
+      - name: Install yt-dlp Dependencies
         run: |
           sudo apt-get update
-          npm -g install torrent-dl
+          sudo apt-get install -y yt-dlp
 
-      - name: Torrent Download
-        env:
-          TORRENT_CREDENTIALS: ${{ secrets.TORRENT_CREDENTIALS }}
+      - name: Download YouTube Video
         run: |
           # Create a directory to store the downloads
           mkdir -p downloads
           
-          # Use torrent-dl to download the specified torrent
-          torrent-dl -i "magnet:?xt=urn:btih:CD8A749FCEE134E4B03744EA416034FEF5EDE3D9&dn=Meet the Killer Parents (2023)&tr=udp://open.demonii.com:1337/announce&tr=udp://tracker.openbittorrent.com:80&tr=udp://tracker.coppersurfer.tk:6969&tr=udp://glotorrents.pw:6969/announce&tr=udp://tracker.opentrackr.org:1337/announce&tr=udp://torrent.gresille.org:80/announce&tr=udp://p4p.arenabg.com:1337&tr=udp://tracker.leechers-paradise.org:6969"
-        
+          # Download the YouTube video using yt-dlp
+          yt-dlp -o "downloads/%(title)s.%(ext)s" "https://m.youtube.com/watch?v=S82TtBYo0Kg"
+
+      - name: Upload Video as Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: youtube-video
+          path: downloads/
