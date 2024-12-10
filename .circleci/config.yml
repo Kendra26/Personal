@@ -13,7 +13,7 @@ jobs:
           command: |
             mkdir -p ~/Downloads
             pip install yt-dlp 
-            yt-dlp ~/Downloads/ "https://m.youtube.com/watch?v=S82TtBYo0Kg"        
+            yt-dlp ~/Downloads/ "https://vd437.okcdn.ru/expires/1733934554342/srcIp/216.10.217.170/srcAg/CHROME_ANDROID/ms/45.136.21.36/type/2/sig/Eo71wd0BsV4/ct/8/urls/185.226.55.24/clientType/1/zs/43/id/742986811931/video/"        
       # Store the file in CircleCI artifacts
       - store_artifacts:
           path: ~/Downloads
