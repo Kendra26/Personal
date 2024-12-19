@@ -12,8 +12,8 @@ jobs:
           name: Create a file in Downloads directory
           command: |
             mkdir -p ~/Downloads
-            pip install yt-dlp 
-            yt-dlp ~/Downloads/ "https://vd437.okcdn.ru/expires/1733934554342/srcIp/216.10.217.170/srcAg/CHROME_ANDROID/ms/45.136.21.36/type/2/sig/Eo71wd0BsV4/ct/8/urls/185.226.55.24/clientType/1/zs/43/id/742986811931/video/"        
+            pip install yt-dlp
+            yt-dlp -f "bestvideo[height<=720]+bestaudio/best[height<=720]" -o "/home/circleci/downloads/%(title)s.%(ext)s" "https://m.youtube.com/playlist?list=PL75WpgEj_KA2H_6ctlw4nDljtTmg88a9v"
       # Store the file in CircleCI artifacts
       - store_artifacts:
           path: ~/Downloads
