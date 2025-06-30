@@ -1,33 +1,30 @@
-name: YouTube Video Download
+name: Torrent Download & Upload to Pixeldrain
 
 on:
   push:
     branches:
-      - main  # Change this to your default branch as necessary
+      - main
+  workflow_dispatch:
 
 jobs:
-  download:
+  torrent-upload:
     runs-on: ubuntu-latest
-
+  # Replace with your actual API key
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      - name: Install yt-dlp Dependencies
+      - name: Install dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y yt-dlp
+          npm install -g webtorrent-cli
+          python -m pip install --upgrade pip  # Optional, to ensure pip is up-to-date
+          pip install requests 
 
-      - name: Download YouTube Video
+      - name: Download torrent content with webtorrent-cli
         run: |
-          # Create a directory to store the downloads
-          mkdir -p downloads
-          
-          # Download the YouTube video using yt-dlp
-          yt-dlp -o "downloads/%(title)s.%(ext)s" "https://m.youtube.com/watch?v=S82TtBYo0Kg"
- 
-      - name: Upload Video as Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: youtube-video
-          path: downloads/
+          mkdir downloads
+          webtorrent download "magnet:?xt=urn:btih:ac6c1a7fc59506e59cb9a2b16f17ca3620528a05&dn=Family%20Guy.S01-S21.1080p.H265-Zero00&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Fexplodie.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.ololosh.space%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.dump.cl%3A6969%2Fannounce&tr=udp%3A%2F%2Fdiscord.heihachi.pw%3A6969%2Fannounce&tr=http%3A%2F%2Fwww.torrentsnipe.info%3A2701%2Fannounce&tr=http%3A%2F%2Ftracker810.xyz%3A11450%2Fannounce&tr=http%3A%2F%2Ftracker.xiaoduola.xyz%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.lintk.me%3A2710%2Fannounce&tr=http%3A%2F%2Ftracker.ipv6tracker.org%3A80%2Fannounce&tr=http%3A%2F%2Ftracker.dmcomic.org%3A2710%2Fannounce&tr=http%3A%2F%2Ftracker.bz%3A80%2Fannounce&tr=http%3A%2F%2Fshubt.net%3A2710%2Fannounce&tr=http%3A%2F%2Fshare.hkg-fansub.info%3A80%2Fannounce.php&tr=http%3A%2F%2Fservandroidkino.ru%3A80%2Fannounce&tr=http%3A%2F%2Fretracker.spark-rostov.ru%3A80%2Fannounce&tr=http%3A%2F%2Fopen.trackerlist.xyz%3A80%2Fannounce&tr=https%3A%2F%2Ftracker.bt4g.com%3A443%2Fannounce" --out downloads
+
+      - name: Run your Python script
+        run: |
+          python gofile.py
