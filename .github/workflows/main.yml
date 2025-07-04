@@ -3,7 +3,7 @@ name: Torrent Download & Upload to Pixeldrain
 on:
   push:
     branches:
-      - Download
+      - main
   workflow_dispatch:
 
 jobs:
