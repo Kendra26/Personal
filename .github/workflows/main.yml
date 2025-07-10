@@ -21,7 +21,7 @@ jobs:
         
       - name: Download torrent content with webtorrent-cli
         run: |
-          webtorrent download "magnet:?xt=urn:btih:A04EB95633A09C2F164581922139D6DE0CEBF444&dn=Murder%20By%20Medic%20S04E08%20Alison%20Firth%20720p%20AMZN%20WEB-DL%20DDP2%200%20H%20264-RAWR&tr=udp://tracker.bittor.pw:1337/announce&tr=udp://tracker.opentrackr.org:1337/announce&tr=udp://tracker.dler.org:6969/announce&tr=udp://open.stealth.si:80/announce&tr=udp://tracker.torrent.eu.org:451/announce&tr=udp://exodus.desync.com:6969/announce&tr=udp://open.demonii.com:1337/announce" --out ./downloaded_files
+          webtorrent download "magnet:?xt=urn:btih:D68F53DA206B17C8DDBB4CB89466CFDB7AE94D31&dn=On%20The%20Case%20with%20Paula%20Zahn%20S28E01%201080p%20WEB%20h264-FREQUENCY&tr=udp://tracker.bittor.pw:1337/announce&tr=udp://tracker.opentrackr.org:1337/announce&tr=udp://tracker.dler.org:6969/announce&tr=udp://open.stealth.si:80/announce&tr=udp://tracker.torrent.eu.org:451/announce&tr=udp://exodus.desync.com:6969/announce&tr=udp://open.demonii.com:1337/announce" "magnet:?xt=urn:btih:f2ebfecc69ed45fbadcbe72706c197c2522dc496&dn=Poker%20Face%202023%20S02E12%20The%20End%20of%20the%20Road%20720p%20PCOK%20WEB-DL%20DDP5%201%20x264-NTb&tr=udp://tracker.bittor.pw:1337/announce&tr=udp://tracker.opentrackr.org:1337/announce&tr=udp://tracker.dler.org:6969/announce&tr=udp://open.stealth.si:80/announce&tr=udp://tracker.torrent.eu.org:451/announce&tr=udp://exodus.desync.com:6969/announce&tr=udp://open.demonii.com:1337/announce" --out ./downloaded_files
 
       - name: Upload all downloaded files (recursive)
         run: |
