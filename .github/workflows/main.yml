@@ -21,7 +21,7 @@ jobs:
         
       - name: Download torrent content with webtorrent-cli
         run: |
-          webtorrent download "magnet:?xt=urn:btih:c66ddb9dfb8646fb21a9d298f00fc9d143f3aa0d&dn=Brick+2025+1080p+NF+WEB-DL+DDP5+1+Atmos+H+264-playWEB%20%20%20%20%20%20%20%20&tr=udp://tracker.bittor.pw:1337/announce%20%20%20%20%20%20%20%20&tr=udp://tracker.opentrackr.org:1337/announce%20%20%20%20%20%20%20%20&tr=udp://tracker.dler.org:6969/announce%20%20%20%20%20%20%20%20&tr=udp://open.stealth.si:80/announce%20%20%20%20%20%20%20%20&tr=udp://tracker.torrent.eu.org:451/announce%20%20%20%20%20%20%20%20&tr=udp://exodus.desync.com:6969/announce%20%20%20%20%20%20%20%20&tr=udp://open.demonii.com:1337/announce" --out ./downloaded_files
+          webtorrent download "magnet:?xt=urn:btih:4c393788a8216544561677c5abdb936e7326fb07&dn=Brick+2025+1080p+NF+WEB-DL+DUAL+DDP5+1+Atmos+H+264-FLUX%20%20%20%20%20%20%20%20&tr=udp://tracker.bittor.pw:1337/announce%20%20%20%20%20%20%20%20&tr=udp://tracker.opentrackr.org:1337/announce%20%20%20%20%20%20%20%20&tr=udp://tracker.dler.org:6969/announce%20%20%20%20%20%20%20%20&tr=udp://open.stealth.si:80/announce%20%20%20%20%20%20%20%20&tr=udp://tracker.torrent.eu.org:451/announce%20%20%20%20%20%20%20%20&tr=udp://exodus.desync.com:6969/announce%20%20%20%20%20%20%20%20&tr=udp://open.demonii.com:1337/announce" --out ./downloaded_files
 
       - name: Upload all downloaded files (recursive)
         run: |
