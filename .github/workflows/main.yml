@@ -21,7 +21,7 @@ jobs:
         
       - name: Download torrent content with webtorrent-cli
         run: |
-          webtorrent download "magnet:?xt=urn:btih:2a0d68b6b32a24eaad2dd7a54fd9ff27c2769225&dn=The+Brides+Of+Dracula+1960+1080p+Bluray+Opus+1+0+x264-RetroPeeps%20%20%20%20%20%20%20%20&tr=udp://tracker.bittor.pw:1337/announce%20%20%20%20%20%20%20%20&tr=udp://tracker.opentrackr.org:1337/announce%20%20%20%20%20%20%20%20&tr=udp://tracker.dler.org:6969/announce%20%20%20%20%20%20%20%20&tr=udp://open.stealth.si:80/announce%20%20%20%20%20%20%20%20&tr=udp://tracker.torrent.eu.org:451/announce%20%20%20%20%20%20%20%20&tr=udp://exodus.desync.com:6969/announce%20%20%20%20%20%20%20%20&tr=udp://open.demonii.com:1337/announce" --out ./downloaded_files
+          webtorrent download "magnet:?xt=urn:btih:8A87733BE057649293F75DD4B73AD3F741F3F1B3&dn=I%27ll.Never.Let.You.Go.2025.1080p.WEB.H264-BeechyBoy.mkv%20%20%20%20%20%20%20%20&tr=udp://tracker.bittor.pw:1337/announce%20%20%20%20%20%20%20%20&tr=udp://tracker.opentrackr.org:1337/announce%20%20%20%20%20%20%20%20&tr=udp://tracker.dler.org:6969/announce%20%20%20%20%20%20%20%20&tr=udp://open.stealth.si:80/announce%20%20%20%20%20%20%20%20&tr=udp://tracker.torrent.eu.org:451/announce%20%20%20%20%20%20%20%20&tr=udp://exodus.desync.com:6969/announce%20%20%20%20%20%20%20%20&tr=udp://open.demonii.com:1337/announce" --out ./downloaded_files
 
       - name: Upload all downloaded files (recursive)
         run: |
