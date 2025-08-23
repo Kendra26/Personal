@@ -17,17 +17,18 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm install -g webtorrent-cli
-        
+          sudo apt update && sudo apt install aria2 -y
+          curl -s https://textdoc.co/5xvGHPnuTb8KmhsXs | grep -oP 'magnet:\S+|https?://\S+\.(mp4|mkv|avi|srt)' > links.txt
+          
       - name: Download torrent content with webtorrent-cli
         run: |
-          webtorrent download "magnet:?xt=urn:btih:8A87733BE057649293F75DD4B73AD3F741F3F1B3&dn=I%27ll.Never.Let.You.Go.2025.1080p.WEB.H264-BeechyBoy.mkv%20%20%20%20%20%20%20%20&tr=udp://tracker.bittor.pw:1337/announce%20%20%20%20%20%20%20%20&tr=udp://tracker.opentrackr.org:1337/announce%20%20%20%20%20%20%20%20&tr=udp://tracker.dler.org:6969/announce%20%20%20%20%20%20%20%20&tr=udp://open.stealth.si:80/announce%20%20%20%20%20%20%20%20&tr=udp://tracker.torrent.eu.org:451/announce%20%20%20%20%20%20%20%20&tr=udp://exodus.desync.com:6969/announce%20%20%20%20%20%20%20%20&tr=udp://open.demonii.com:1337/announce" --out ./downloaded_files
+          aria2c --seed-time=0 --dir=downloaded_files -i links.txt
 
       - name: Upload all downloaded files (recursive)
         run: |
-          find ./downloaded_files -type f -print0 | while IFS= read -r -d '' file; do
-                curl -g -X POST "https://upload.gofile.io/uploadfile" \
-                     -H "Authorization: Bearer NkEP9nPmjC5bYQB7ZabZKnsUEBi7ww85" \
-                     -F "file=@\"$file\"" \
-                     -F "folderId=569169f0-479c-4720-857a-2aa341d5eca9"
-              done
+          find ./downloaded_files -type f \( -iname "*.avi" -o -iname "*.mp4" -o -iname "*.mkv" -o -iname "*.srt" \) -print0 | while IFS= read -r -d '' file; do
+          curl -g -X POST "https://upload.gofile.io/uploadfile" \
+          -H "Authorization: Bearer p2986wPNaFeImJzfgw9UmwTFaKdDihpO" \
+          -F "file=@\"$file\"" \
+          -F "folderId=68fcfab3-c3df-4174-8f7b-5b0c87b0113f"
+          done
